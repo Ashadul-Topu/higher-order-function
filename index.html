@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> callback & Higher order function </title>
+</head>
+<body>
+    <ul>
+        <h4>8. Promise / Async</h4>
+        <li> 8.1 Synchronous vs Asynchronous</li>
+        <li>Callback, higher-order function</li>
+        <li>promise</li>
+        <li>Async await</li>
+    </ul>
+
+
+    <script>
+        function square(x){
+            console.log(`square value of ${x} = ${x*x}`);
+        }
+
+        // higher order functions is a function who receive another function as a parameter
+        function higherOrderFunction(num, callback){
+            square(num);
+        }
+        higherOrderFunction(5, square)
+
+
+        // make asynchronous function to synchronous function
+
+        function taskOne(callback){
+            console.log('Task One');
+            taskTwo();
+        }
+        function taskTwo(callback){
+            setTimeout(()=>{
+                console.log('Task Two')
+                taskThree();
+            }, 3000)
+        }
+        function taskThree(callback){
+            console.log('Task Three');
+            taskFour();
+        }
+        function taskFour(callback){
+            console.log('Task Four');
+            taskFive();
+        }
+        function taskFive(){
+            console.log('Task Five');
+        }
+
+
+        taskOne(()=>{
+            taskTwo(()=>{
+                taskThree(()=>{
+                    taskFour(()=>{})
+                })
+            })
+        });
+
+    
+    </script>
+</body>
+</html>
